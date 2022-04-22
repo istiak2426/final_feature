@@ -62,5 +62,31 @@ export const initPayment = token =>{
 }
 
 export const getOrders = token =>{
-    return axios.get(`${API}/order`)
+    return axios.get(`${API}/order`, 
+    {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    })
+}
+
+
+export const getSpecificOrders = async (token, id)=>{
+
+
+
+
+    const res = await axios.get(`${API}/order/${id}`,{
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    
+    )
+
+    return res;
+    
+
+
+    
 }

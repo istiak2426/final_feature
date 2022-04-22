@@ -134,6 +134,8 @@ const Cart = () => {
       .catch(() => {});
   };
 
+  
+
   return (
     <Layout
       title="Your Cart"

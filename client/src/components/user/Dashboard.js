@@ -2,7 +2,7 @@ import Layout from '../Layout';
 import { Link } from 'react-router-dom';
 import { userInfo } from '../../utils/auth';
 
-import {getOrders} from "../../api/apiOrder";
+import {getOrders, getSpecificOrders} from "../../api/apiOrder";
 import { useEffect, useState } from 'react';
 
 import Order from './Order';
@@ -14,13 +14,32 @@ const Dashboard = () => {
 
     const [orders, setOrders]= useState([])
 
+   
+
+
+
+
+
 
 
     useEffect(()=>{
-        getOrders()
+
+       const id = userInfo()._id;
+       const token = userInfo().token;
+
+     
+        getSpecificOrders(token, id)
+
         .then(res => setOrders(res.data));
+
     }, [])
 
+
+
+
+
+
+console.log(orders)
 
  
 
@@ -30,6 +49,18 @@ const Dashboard = () => {
 
     
     const { name, email, role } = userInfo();
+
+    
+
+  
+
+
+
+
+
+
+
+   
     const UserLinks = () => {
         return (
             <div className="card">

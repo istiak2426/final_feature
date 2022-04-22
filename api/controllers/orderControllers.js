@@ -27,7 +27,7 @@ module.exports.getSpecificOrders = async (req, res) => {
     const id = req.params.userId;
     const user = await User.findOne({_id:id})
 
-    const orders = await Order.findOne({user:user});
+    const orders = await Order.find({user:user});
     return res.status(200).send(orders);
 
 }

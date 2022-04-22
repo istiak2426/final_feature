@@ -2,8 +2,12 @@ import React from "react";
 
 const Order = (props) => {
 
+
+
   return (
     <div>
+
+
       <ul className="list-group" style={{border: "2px solid black"}}>
         <li className="list-group-item">User Id: {props.order.user} </li>
         <li className="list-group-item">Phone number: {props.order.address.phone}</li>
