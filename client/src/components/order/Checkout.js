@@ -3,11 +3,8 @@ import { getCartItems, getProfile } from '../../api/apiOrder';
 import { userInfo } from '../../utils/auth';
 import Layout from '../Layout';
 import { Link } from 'react-router-dom';
-
 import { isAuthenticated } from "../../utils/auth";
-
 import CouponList from "./CouponList";
-
 import { getCouponItem } from "../../api/apiAdmin";
 
 const Checkout = () => {
@@ -33,6 +30,20 @@ const Checkout = () => {
         country
     } = values;
 
+
+    const submitHandler = ()=>{
+      console.log("clicked")
+
+      const order = {
+        ingredients: this.props.ingredients,
+        customer: this.state.values,
+        price: this.props.totalPrice,
+        orderTime: new Date(),
+        userId: this.props.userId,
+    }
+      
+    }
+
     const loadCoupon = () => {
         getCouponItem()
           .then((response) => setCouponItems(response.data))
@@ -52,17 +63,6 @@ const Checkout = () => {
         loadCart();
         loadCoupon();
     }, []);
-
-
-    const submitHandler =()=>{
-      const order = {
-  
-        
-    }
-    }
-
-   
-
 
     const getOrderTotal = () => {
         const arr = orderItems.map(cartItem => cartItem.price * cartItem.count);
@@ -92,8 +92,7 @@ const Checkout = () => {
             coupon: coupon.discount,
           };
     
-          // addToCart(user.token, cartItem)
-          // .then((reponse) => console.log(reponse.data))
+
         }
       };
 
@@ -105,6 +104,7 @@ const Checkout = () => {
 
       if (selectedCoupon.length === 0) {
         onSelect = (
+      
           <tr>
             <th scope="row">No Promo</th>
             <th></th>
@@ -115,7 +115,7 @@ const Checkout = () => {
         );
       } else if (selectedCoupon.length === undefined) {
         onSelect = (
-          <>
+      
             <tr>
               <th scope="row">Promo</th>
               <th>{selectedCoupon.name}</th>
@@ -123,7 +123,7 @@ const Checkout = () => {
               <td></td>
               <td align="right">৳ {selectedCoupon.discount}</td>
             </tr>
-          </>
+       
         );
       }
 
@@ -141,11 +141,11 @@ const Checkout = () => {
     if (address1 && city && phone && postcode && country) return (<>
         <Layout title="Checkout" description="Complete your order!" className="container">
             <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><Link href="#">Order</Link></li>
-                    <li class="breadcrumb-item"><Link href="#">Cart</Link></li>
-                    <li class="breadcrumb-item"><Link href="#">Shipping Address</Link></li>
-                    <li class="breadcrumb-item active" aria-current="page">Checkout</li>
+                <ol className="breadcrumb">
+                    <li className="breadcrumb-item"><Link href="#">Order</Link></li>
+                    <li className="breadcrumb-item"><Link href="#">Cart</Link></li>
+                    <li className="breadcrumb-item"><Link href="#">Shipping Address</Link></li>
+                    <li className="breadcrumb-item active" aria-current="page">Checkout</li>
                 </ol>
             </nav>
             <div className="container">
@@ -171,7 +171,11 @@ const Checkout = () => {
                             </div>
                         </div>
                         <br />
-                        <p><Link className="btn btn-warning btn-md" to="/payment">Make Payment</Link></p>
+                        <p><button 
+                        className='btn'
+                         onClick={submitHandler}
+                        >
+                          Make Payment</button></p>
                     </div>
                 </div>
 
