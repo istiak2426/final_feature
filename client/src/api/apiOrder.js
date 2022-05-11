@@ -61,6 +61,16 @@ export const initPayment = token =>{
     })
 }
 
+export const createOrder = async (token, order) => {
+    const res = await axios.post(`${API}/order`, order, {
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        }
+    })
+    return res;
+}
+
 export const getOrders = token =>{
     return axios.get(`${API}/order`, 
     {
@@ -79,6 +89,5 @@ export const getSpecificOrders = async (token, id)=>{
         }
     }
     )
-
     return res;
 }

@@ -9,12 +9,11 @@ import {
 } from "../../api/apiOrder";
 
 import CouponList from "./CouponList";
-
 import { getCouponItem } from "../../api/apiAdmin";
-
 import { userInfo } from "../../utils/auth";
-
 import { isAuthenticated } from "../../utils/auth";
+
+
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -22,6 +21,8 @@ const Cart = () => {
   const [selectedCoupon, setSelectedCoupon] = useState([]);
 
   const [totalSum, setTotalSum] = useState(0);
+
+  console.log(cartItems);
 
   const loadCart = () => {
     getCartItems(userInfo().token)
@@ -44,7 +45,6 @@ const Cart = () => {
     const onSelectCoupon = (coupon) => {
       setSelectedCoupon(coupon);
       setTotalSum((prevState) => {
-  
         return  getCartTotal()
       });
   
@@ -80,7 +80,7 @@ const Cart = () => {
   };
 
  
-  console.log(totalSum)
+
 
   let onSelect = null;
 

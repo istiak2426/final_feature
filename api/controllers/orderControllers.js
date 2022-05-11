@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { Order, validate } = require('../models/order');
+const { Order } = require('../models/order');
 const { User } = require('../models/user');
 
 module.exports.createOrder = async (req, res) => {
